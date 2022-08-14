@@ -1,0 +1,252 @@
+////
+/// @group components
+/// Styles for hero images.
+////
+
+$hero-content-width: rem-calc(660);
+$hero-overlay: rgba($black, .4);
+$hero-background-fallback: $gray;
+
+// Hero Text Stlyes
+$title-font: $serif;
+$subtitle-font: $sans-serif;
+
+/*
+GLOBAL HERO STYLES
+-------------------
+*/
+
+.parallax-mask {
+  position: relative;
+  z-index: 3;
+  background: $white;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  max-height: 75vh;
+
+  img,
+  video,
+  .video-feature {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @include breakpoint(medium) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $hero-background-fallback;
+  }
+}
+
+.hero__media {
+  display: block;
+  width: 100%;
+}
+
+.hero__content {
+  z-index: 3;
+  padding: rem-calc(20);
+
+  h1,
+  p {
+    @include breakpoint(medium) {
+      text-align: center;
+      color: $white;
+    }
+  }
+
+  h1 {
+    font-family: $title-font;
+  }
+
+  p {
+    max-width: $hero-content-width;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: $subtitle-font;
+  }
+
+  .btn {
+    margin: auto;
+  }
+
+  @include breakpoint(medium) {
+    position: absolute;
+    color: $white;
+  }
+}
+
+.hero__overlay {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: $hero-overlay;
+
+  @include breakpoint(small only) {
+    display: none;
+  }
+}
+
+/*
+HERO VIDEO
+---------------------------
+*/
+.autoplay-video-container {
+  position: relative;
+}
+
+.hero--video {
+
+  .video-feature,
+  video {
+    position: relative;
+    z-index: 2;
+  }
+
+  img {
+
+    @include breakpoint(medium up) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+    }
+  }
+}
+
+/*
+BASIC HERO With Image *Most Common* (No masking) -- Most effective with Title, and Image only
+------------------------
+*/
+
+.hero--no-img {
+  justify-content: flex-start;
+  background: none;
+
+  .hero__content {
+    @include xy-grid-container($grid-container, $grid-container-padding);
+    @include global-spacing(large, padding-top padding-bottom);
+    position: relative;
+    width: 100%;
+
+    h1,
+    p {
+      margin-right: 0;
+      margin-left: 0;
+      text-align: left;
+      color: $black;
+    }
+  }
+}
+
+/*
+HERO VIDEO & IMAGE WITH PARALLAX
+------------------------
+*/
+
+.hero.hero--parallax {
+  overflow: hidden;
+  min-height: 85vh;
+
+  img,
+  video {
+    height: 135%; // height should be 100% + parallax amount IE 35%
+    transform: translateY(calc(var(--scroll-tracker) * 35%));
+    will-change: transform;
+  }
+
+  .hero__media,
+  .video-feature,
+  .autoplay-video-container {
+    height: 100%;
+  }
+
+  img,
+  video,
+  .hero__media,
+  .video-feature,
+  .autoplay-video-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+/*
+HERO iFrame WITHOUT
+------------------------
+*/
+
+.hero--iframe {
+
+  .video-feature {
+    position: relative;
+    z-index: 3;
+    overflow: hidden;
+    height: 0;
+    padding-top: 30px;
+    padding-bottom: 56.25%;
+  }
+
+  img {
+    @include breakpoint(medium) {
+      position: absolute;
+    }
+  }
+
+  iframe {
+    @include breakpoint(medium) {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-width: 1165px;
+      height: 100%;
+      min-height: 700px;
+    }
+  }
+
+  .video-feature {
+    display: none;
+
+    @include breakpoint(medium) {
+      display: block;
+      margin-top: rem-calc(-50);
+    }
+  }
+}
+
+/*
+HERO IFRAME WITH PARALLAX
+---------------------------
+*/
+
+.hero--parallax-iframe {
+
+  .video-feature {
+    display: none;
+
+    @include breakpoint(medium) {
+      position: relative;
+      z-index: 2;
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+}

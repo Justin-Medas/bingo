@@ -1,0 +1,8 @@
+////
+/// @group global
+/// Section block rules
+////
+
+.global-spacing:last-child {
+  @include global-spacing(3xlarge, margin-bottom);
+}

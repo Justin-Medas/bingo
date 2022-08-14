@@ -1,0 +1,76 @@
+////
+/// @group components
+/// Styles for bingo grid.
+////
+
+.bingo-container {
+  position: relative;
+}
+
+.winner-banner {
+  @include global-spacing(small, padding-top padding-bottom);
+  @include global-spacing(xsmall,margin-top);
+  background-color: $violet;
+  color: $white;
+  position: sticky;
+  z-index: 3;
+  text-align: center;
+  bottom: 0;
+  transform: translateY(101%);
+  transition: transform 1.2s $bezier-ease--swanky, opacity .6s $bezier-ease--soft;
+  opacity: 0;
+  &--active {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.bingo-grid__column {
+  @include xy-cell(1 of 5, $gutters: 0);
+  text-align: center;
+}
+
+.card--bingo {
+  transition: color .8s $bezier-ease--soft, background-color .8s $bezier-ease--soft;
+  &--selected {
+    background-color: $primary-color;
+    color: $white;
+  }
+  &--free-space {
+    background-color: $violet;
+  }
+}
+
+.btn--new-bingo-card,
+.btn--drawn-number {
+  display: block;
+  width: 100%;
+  margin: 0;
+
+  & + & {
+    @include global-spacing(xsmall, margin-top);
+  }
+}
+
+.drawn-numbers {
+  margin-top: -$spacing--3xsmall;
+  li {
+    width: 35px;
+    height: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: rem-calc(20);
+    margin-top: $spacing--3xsmall;
+    
+    &.on-bing-card {
+      background-color: $primary-color;
+      color: $white;
+    }
+  
+    &:not(:last-child) {
+      margin-right: $spacing--3xsmall;
+    }
+  }
+} 

@@ -1,0 +1,163 @@
+////
+/// @type card
+/// @group card
+/// Each card type is created without media queries as this mixin is intended to be used within them
+////
+
+/// Implement a card system that leverages the style guide
+///
+/// @param {String} $size [null] - large, medium, small -- Refers to spacing / padding around the inner card content. In some cases (often based on deisgn scheme) these sizes also refer to spacing & font sizes
+/// @example scss - Set large, medium, or small to `.card` or any card modifier
+///   .card {
+///     @include card($size: 'large');
+///   }
+///
+/// @param {Number} $custom-size [null] - Custom padding values applied to .card__content__inner
+/// @example scss - Set top, right, bottom, left padding to `.card` or any card modifier
+///   .card {
+///     @include card($custom-size: rem-calc(40 30 20 30));
+///   }
+///
+/// @param {String} $orientation ['stacked'] - 'inline', 'offset', or 'stacked' - Whether the `.card__media` and `card__content` elements should be in a column or a row
+/// @example scss - Set 'inline', or 'stacked' to `.card` or any card modifier
+///   .card {
+///     @include card($orientation: 'stacked');
+///   }
+///
+/// @param {Number} $xy-column-value [6] - The size of your cell. Can be full (100% width), auto (use all available space), shrink (use only the required space) or any fraction (6, 50%, 1 of 2 or 1/2...)
+/// @example scss - Set large, medium, small `.card` or any card modifier
+///   .card {
+///     @include card($xy-column-value: 50%);
+///   }
+///
+/// @param {String} $align [center] - passed to the rule align-items: value; flex align the card media and content
+/// @example scss - Set any flex alignment values to `.card` or any card modifier
+///   .card {
+///     @include card($align: center);
+///   }
+///
+/// @param {String} $justify [center] - passed to the rule justify-content: value; flex justify the card media and content
+/// @example scss - Set any flex alignment values to `.card` or any card modifier
+///   .card {
+///     @include card($justify: flex-end);
+///   }
+///
+/// @param {Boolean} $collapse [false] - true/false Determines if the card content should have left/right/bottom padding
+/// @example scss - Set true/false to `.card` or any card modifier
+///   .card {
+///     @include card($justify: flex-end);
+///   }
+///
+/// @param {Number} $offset-value [-$spacing--2xlarge] - If `$orientation` is set to `offset` this value is applied to `.card__content` to stagger it and the `card__media`
+/// @example scss - Set true/false to `.card` or any card modifier
+///   .card {
+///     @include card($orientation: 'offset', $offset-value: -60px);
+///   }
+////
+
+@mixin card(
+  $orientation: 'stacked',
+  $custom-size: false,
+  $size: null,
+  $xy-column-value: 6,
+  $align: center,
+  $justify: center,
+  $collapse: false,
+  $offset: false,
+  $offset-value: -$spacing--2xlarge,
+) {
+  justify-content: $justify;
+  align-items: $align;
+  @if $custom-size {
+    .card__content__inner {
+      padding: #{$custom-size};
+    }
+  }
+  @if $size == 'large' {
+    .card__content__inner {
+      padding: $spacing--medium;
+    }
+  }
+  @if $size == 'medium' {
+    .card__content__inner {
+      padding: $spacing--small;
+    }
+  }
+  @if $size == 'small' {
+    .card__content__inner {
+      padding: $spacing--xsmall;
+    }
+  }
+  @if $orientation == 'inline' {
+    display: flex;
+    flex-wrap: nowrap;
+    .card__media {
+      @include xy-cell(
+        $size: $xy-column-value,
+        $gutter-output: null,
+        $gutters: 0,
+      );
+      margin-bottom: 0;
+    }
+    .card__content {
+      flex: 1;
+    }
+    @if $offset == true {
+      margin-top: $offset-value;
+    }
+  }
+  @if $orientation == 'stacked' {
+    display: flex;
+    flex-wrap: wrap;
+    .card__media {
+
+      @include xy-cell(
+        $size: 12,
+        $gutter-output: null,
+        $gutters: 0,
+      );
+      margin-bottom: 0;
+    }
+    .card__content {
+      @include xy-cell(
+        $size: 12,
+        $gutter-output: null,
+        $gutters: 0,
+      );
+    }
+  }
+  @if $orientation == 'offset' {
+    display: block;
+    .card__media {
+
+      @include xy-cell(
+        $size: $xy-column-value,
+        $gutter-output: null,
+        $gutters: 0,
+      );
+      margin-bottom: 0;
+    }
+    .card__content {
+
+      @include xy-cell(
+        $size: $xy-column-value,
+        $gutter-output: null,
+        $gutters: 0,
+      );
+      position: relative;
+      z-index: 2;
+      float: right;
+      margin-top: $offset-value;
+    }
+  }
+  @if $collapse == true {
+    .card__content__inner {
+      padding-right: 0;
+      padding-bottom: 0;
+      padding-left: 0;
+    }
+  }
+  img {
+    display: block;
+  }
+}

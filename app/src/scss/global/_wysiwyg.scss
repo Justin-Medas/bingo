@@ -1,0 +1,144 @@
+////
+/// @group global
+/// Styles neede to format content created in the WYSIWYG editor.
+////
+
+body {
+  font-family: $sans-serif;
+}
+
+.intro-text {
+  @include secondary-typeface(intro-text);
+}
+
+.align-right,
+.obj-right {
+  @include align-right;
+
+  img {
+    display: block;
+  }
+}
+
+.align-left,
+.obj-left {
+  @include align-left;
+
+  img {
+    display: block;
+  }
+}
+
+.align-center,
+.obj-center {
+  @include align-center;
+
+  img {
+    display: block;
+  }
+}
+
+[data-embed-button='jmu_media_embed'] {
+
+  .video-embed-field-responsive-video,
+  .responsive-video-iframe {
+    width: 100%;
+  }
+}
+
+// Figures with Captions (We disable Lint because selector chaining like "HTML.ClassName" is not valid)
+// stylelint-disable
+
+article.align-center {
+
+  img {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+figure.align-right,
+figure.alignright,
+figure.obj-right,
+figure.align-left,
+figure.alignleft,
+figure.obj-left,
+figure.align-center,
+figure.obj-center,
+.align-center,
+.obj-center  {
+  display: table;
+
+  figcaption {
+    display: table-caption;
+  }
+
+  &.responsive-video-iframe {
+    min-width: 40%;
+  }
+}
+
+// stylelint-enable
+
+figcaption {
+  @include secondary-typeface(caption);
+  margin-top: .5em;
+  caption-side: bottom;
+  color: $gray--dark;
+}
+
+// @type Spacing for Text Items
+// ---------
+// Text Scope
+$wysiwyg-item-scope: 'p, ul, ol, .section--wysiwyg li, .cke_editable li, .intro-text, blockquote, .btn, h1, h2, h3, h4, h5, h6, .link-arrow';
+
+// Apply margins globally to all elements within a WYSIWYG
+.wysiwyg {
+
+  #{$wysiwyg-item-scope} {
+
+    @include global-spacing(small, margin-top);
+    margin-bottom: 0;
+  }
+
+  .intro-text {
+    @include global-spacing(small, margin-top);
+  }
+
+  // Items with default top spacing
+  h3,
+  h4,
+  h5,
+  h6,
+  blockquote {
+    @include global-spacing(default, margin-top);
+  }
+}
+
+.mobile-table {
+  @include global-spacing(small, margin-top);
+  padding: 0;
+
+  table {
+    margin: 0;
+  }
+}
+
+// List Spacing
+.section--wysiwyg,
+.wysiwyg {
+
+  ol,
+  ul {
+
+    ol,
+    ul {
+      @include global-spacing(small, margin-top);
+      @include global-spacing(small, margin-bottom);
+    }
+  }
+
+  li {
+    @include global-spacing(xsmall, margin-top);
+  }
+}

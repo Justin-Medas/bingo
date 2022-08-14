@@ -1,0 +1,128 @@
+////
+/// @type card
+/// @group card
+////
+
+/// Styles for cards. Depends on _card.scss utilities mixin
+/// Card size modifiers refer to the padding around the card__content__inner
+/// The unmodified card is always small
+/// The rules that may need to be overridden per project happen on this class
+/// the .card class should be included on all cards
+
+.card {
+  @include card($size: small);
+
+  &__media {
+    position: relative;
+  }
+
+  figure {
+    margin: 0;
+  }
+}
+/// Medium card size only for medium up
+/// @name card--medium
+.card--medium {
+  @include breakpoint(medium) {
+    @include card($size: medium);
+  }
+}
+/// Large card size
+/// @name card--large
+.card--large {
+  @include breakpoint(medium) {
+    @include card($size: medium);
+  }
+
+  @include breakpoint(large) {
+    @include card($size: large);
+  }
+}
+
+/// This class is used to display card__media, and card__content side-by-side
+/// @name card--inline
+.card--inline {
+  @include card($orientation: 'inline');
+}
+
+
+/// This class is used to for cards that should stack small down
+/// @name card--stacked--small
+.card--stacked--small {
+  @include breakpoint(small down) {
+    @include card($orientation: 'stacked');
+  }
+}
+/// This class is used to make sure the card is stacked at all sizes
+/// @name card--stacked
+.card--stacked {
+  @include card($orientation: 'stacked');
+}
+
+/// This class is used to stack and collapse padding on the left, right, and bottom
+/// @name card--collapse
+.card--collapse {
+  @include card(
+    $orientation: 'stacked',
+    $collapse: true,
+  );
+}
+
+/// This class is used for tiny cards. Smaller than card--small
+/// @name card--tiny
+.card--tiny {
+  @include card(
+    $size: small,
+    $orientation: 'inline',
+    $align: flex-start,
+    $xy-column-value: 3,
+  );
+
+  h2,
+  h3 {
+    @include typeface(h6);
+  }
+}
+
+/// This clas is uused to offset card__content and card__media
+/// @name card--offset
+.card--offset {
+  @include breakpoint(medium) {
+    @include card(
+      $size: large,
+      $orientation: 'inline',
+      $xy-column-value: 6,
+      $offset: true,
+    );
+  }
+}
+
+/// This class is when the card__media should extend to the edge of the browser, while the card__content is positioned on top
+/// @name card--full-width
+.card--full-width {
+  position: relative;
+
+  .card__content {
+
+    @include global-spacing(xlarge, padding-bottom);
+    @include global-spacing(xlarge, padding-right);
+    position: absolute;
+    max-width: rem-calc(650);
+  }
+
+  .card__content__inner {
+    background: $gray--xlight;
+  }
+
+  @include breakpoint(medium) {
+    @include card(
+      $size: 'large',
+      $align: flex-end,
+      $justify: flex-end,
+    );
+  }
+}
+
+.card--bordered {
+  border: rem-calc(1) solid $blue-green;
+}

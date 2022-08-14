@@ -1,0 +1,51 @@
+////
+/// @group foundation
+/// Variables needed to compile foundation grid.
+////
+
+@import '../foundation-sites/scss/util/_util';
+
+/// Global
+/// ---------
+// The global width should match the value of the 'full' key in the $breakpoints
+// array in section two below.
+$global-width: rem-calc(1200);
+$foundation-palette: (
+  primary: $primary-color,
+  secondary: #767676,
+  success: $message-success,
+  warning: #ffae00,
+  alert: $message-alert,
+);
+$light-gray: $gray--light;
+$medium-gray: $gray;
+$dark-gray: $gray--dark;
+$black: $black;
+$white: $white;
+
+/// Breakpoints
+/// --------------
+$breakpoints: (
+  initial: 0px,
+  tiny: 321px,
+  small: 641px,
+  medium: 769px,
+  large: 1025px,
+  full: 1201px,
+  xlarge: 1441px,
+);
+$print-breakpoint: large;
+$breakpoint-classes: (initial tiny small medium large);
+
+/// Xy Grid
+/// -----------
+$xy-grid: true;
+$grid-container: $global-width;
+$grid-columns: 12;
+$grid-margin-gutters: (
+  initial: 40px
+);
+$grid-padding-gutters: $grid-margin-gutters;
+$grid-container-padding: $grid-padding-gutters;
+$grid-container-max: $global-width;
+$xy-block-grid-max: 8;

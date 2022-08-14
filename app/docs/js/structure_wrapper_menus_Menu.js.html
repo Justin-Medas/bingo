@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>structure/wrapper/menus/Menu.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ButtonToggle.html">ButtonToggle</a></li></ul><h3>Global</h3><ul><li><a href="global.html#cleanLabel">cleanLabel</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Menu">Menu</a></li><li><a href="global.html#setFocus">setFocus</a></li><li><a href="global.html#tabindexAccessibility">tabindexAccessibility</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">structure/wrapper/menus/Menu.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file
+ * Generate a Menu.
+ */
+
+import React from 'react';
+import ButtonToggle from '../../../helpers/buttonToggle';
+import { cleanLabel } from '../../../helpers/cleanLabel';
+
+/**
+ * @todo import and manage Modernizr via WebPack
+ */ 
+
+/**
+ * @param {object} menu a structured menu JS object
+ * @param {string} menuName classes to add to the &lt;nav>
+ * @param {string} menuAriaLabel the arai label added to the &lt;nav>
+ * @param {string} MenuId the id to add to &lt;nav>
+ */
+export function Menu(props) {
+
+  /**
+   * When a user's cursor enters the menu item area
+   * @param {event} e the event from the hovered object
+   */   
+  function handleMouseEnter(e) {
+    if(window.Modernizr.touchevents === false) {
+      e.currentTarget.classList.add('menu-item--open');
+    }
+  }
+
+  /**
+   * When a user's cursor leaves the menu item area
+   * @param {event} e the event from the hovered object
+   */     
+  function handleMouseLeave(e) {
+    if(window.Modernizr.touchevents === false) {
+      e.currentTarget.classList.remove('menu-item--open');
+    }
+  }
+
+  return (
+    &lt;nav 
+      className={props.menuName}
+      aria-label={props.menuAriaLabel}
+      id={props.menuId}
+      key={props.menuId}
+    >
+      &lt;ul className='menu'>
+        {props.menu?.map((menuItem, menuItemKey) => (
+          &lt;li key={`menu-item ${menuItemKey}`} id={cleanLabel(menuItem.title)} className={` menu-item ${menuItem.submenu ? "menu-item--expanded" : ""} `}
+            onMouseEnter={(e) => handleMouseEnter(e)}
+            onMouseLeave={(e) => handleMouseLeave(e)}
+          >
+            
+            {/* If there is a URL add an anchor tag, if not add a span */}
+            {menuItem.url !== undefined &amp;&amp; &lt;a href={menuItem.url}>{menuItem.title}&lt;/a>} 
+            {menuItem.url === undefined &amp;&amp; &lt;span>{menuItem.title}&lt;/span>} 
+            
+            &lt;ButtonToggle
+              buttonClass="menu-item__button"
+              buttonLabel={`open the ${menuItem.title} submenu`}
+              buttonId={cleanLabel(menuItem.title)+'__button'}
+              buttonControls={cleanLabel(menuItem.title)+'__ul'}
+              buttonActiveElement='li'
+              buttonActiveClass='menu-item--open'
+              buttonToggleType='menu'
+            /> 
+            &lt;ul aria-labelledby={cleanLabel(menuItem.title)+'__button'} id={cleanLabel(menuItem.title)+'__ul'}>
+              {menuItem.submenu?.map((submenuItem, submenuItemKey) => (
+                &lt;li key={submenuItemKey} id={cleanLabel(submenuItem.title)} className="menu-item">
+                  {submenuItem.url !== undefined &amp;&amp; &lt;a href={submenuItem.url}>{submenuItem.title}&lt;/a>} 
+                  {submenuItem.url === undefined &amp;&amp; &lt;span>{submenuItem.title}&lt;/span>}                   
+                  {submenuItem.submenu !== undefined &amp;&amp;
+                    &lt;ul>
+                      {submenuItem.submenu?.map((submenuItem, submenuItemKey) => (
+                        &lt;li key={submenuItemKey} id={cleanLabel(submenuItem.title)} className="menu-item">
+                          {submenuItem.url !== undefined &amp;&amp; &lt;a href={submenuItem.url}>{submenuItem.title}&lt;/a>} 
+                          {submenuItem.url === undefined &amp;&amp; &lt;span>{submenuItem.title}&lt;/span>}     
+                        &lt;/li>
+                      ))}
+                    &lt;/ul>
+                  }                  
+                &lt;/li>
+              ))}     
+            &lt;/ul>
+          &lt;/li>
+        ))}
+      &lt;/ul>
+    &lt;/nav>
+  );
+}
+
+export default Menu;</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a> on Tue Jul 05 2022 08:05:37 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

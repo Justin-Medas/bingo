@@ -1,0 +1,68 @@
+////
+/// @group global
+/// Base styles for HTML5 Video elements for any CMS.
+////
+
+// Autoplay video button
+.video-play-button {
+  position: absolute;
+  z-index: 4;
+  bottom: $spacing--medium;
+  left: $spacing--medium;
+  background: none;
+
+  &::after {
+    content: fa-content($fa-var-play-circle);
+    color: $gray--light;
+    font-family: $font-awesome;
+    font-size: rem-calc(40);
+    font-weight: 600;
+  }
+
+  .video-playing &::after {
+    content: fa-content($fa-var-pause-circle);
+  }
+
+  @include breakpoint(small down) {
+    display: none;
+  }
+}
+
+// Lightbox video button
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: rem-calc(45);
+  height: rem-calc(45);
+  transform: translate(-50%, -50%);
+  opacity: .47;
+
+  path {
+    fill: $white;
+  }
+
+  @include breakpoint(medium) {
+    width: rem-calc(125);
+    height: rem-calc(125);
+  }
+}
+
+// Responsive videos
+.wysiwyg .responsive-video-iframe {
+
+  @include aspect-ratio-frame(
+    $aspect-ratio: calc(9/16),
+    $pseudo-selector: '::before',
+    $target-object: 'iframe',
+  );
+}
+
+.wysiwyg .align-center .responsive-video-iframe {
+  min-width: 100%;
+}
+
+.wysiwyg .align-left .responsive-video-iframe,
+.wysiwyg .align-right .responsive-video-iframe {
+  min-width: 300px;
+}

@@ -1,0 +1,72 @@
+////
+/// @group atoms
+/// Styles for buttons.
+/// .btn is the required class, it contains the default inits
+/// Uses the the btn mixin in _buttons.scss
+////
+
+.btn {
+  @include button(small, 'default', true);
+
+  @include breakpoint(medium) {
+    @include button(large, null, false);
+  }
+}
+
+.btn--alternate {
+  @include button(small, 'alternate', false);
+
+  @include breakpoint(medium) {
+    @include button(large, null, false);
+  }
+}
+
+.btn--small {
+  @include button(small, null, false);
+}
+
+.btn--align-right {
+  display: table;
+  margin-left: auto;
+}
+
+.btn--align-center {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.elf-external,
+.link-external,
+.external {
+  position: relative;
+
+  &:after {
+    @include font-awesome;
+    display: inline-block;
+    padding-left: .25em;
+    content: fa-content($fa-var-external-link);
+  }
+}
+
+a[data-entity-type='media']:after,
+[href$='.doc']:after,
+[href$='.docx']:after,
+[href$='.pdf']:after,
+[href$='.ppt']:after,
+[href$='.pptx']:after,
+[href$='.xls']:after,
+[href$='.xlsx']:after,
+[href$='.zip']:after {
+
+  @include font-awesome;
+  display: inline-block;
+  padding-left: .25em;
+  content: fa-content($fa-var-download);
+}
+
+.btn--centered {
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+}

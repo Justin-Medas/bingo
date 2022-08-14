@@ -1,0 +1,100 @@
+////
+/// @group elements
+/// Functions and mixins for elements.
+////
+
+///
+/// @param {Color} $link-color [$primary-color] - The color of the link text
+/// @example scss - Any color value or color variable is accepted
+///   .link-arrow {
+///     @include link-arrow($link-color: $primary-color);
+///   }
+///
+/// @param {Color} $icon-color [$primary-color] - The color of the arrow icon, applied to the pseudo-element
+/// @example scss - Any color value or color variable is accepted
+///   .link-arrow {
+///     @include link-arrow($icon-color: $primary-color);
+///   }
+///
+@mixin link-arrow(
+  $link-color: $primary-color,
+  $icon-color: $primary-color
+) {
+  color: $link-color;
+
+  &.btn {
+    padding-right: $spacing--small;
+  }
+
+  &::after {
+    font-family: $font-awesome;
+    position: absolute;
+    padding-left: $spacing--xsmall;
+    content: fa-content($fa-var-long-arrow-right);
+    font-weight: 300;
+    color: $icon-color;
+    transition: transform $primary-transition, opacity $primary-transition;
+  }
+
+  &:hover,
+  &:focus {
+    &::after {
+      transform: translateX(5px);
+    }
+  }
+}
+
+/// Generates left float rules for objects in WYSIWYGs.
+@mixin align-left {
+  float: none;
+  margin: rem-calc($spacing--small 0);
+
+  @include breakpoint(medium) {
+    float: left;
+    margin: rem-calc($spacing--medium $spacing--xsmall $spacing--xsmall 0);
+  }
+
+  @include breakpoint(large) {
+    margin: rem-calc($spacing--default $spacing--small $spacing--small 0);
+  }
+}
+
+/// Generates right float rules for objects in WYSIWYGs.
+@mixin align-right {
+  float: none;
+  margin: rem-calc($spacing--xsmall 0);
+
+  @include breakpoint(medium) {
+    float: right;
+    margin: rem-calc($spacing--medium 0 $spacing--xsmall $spacing--xsmall);
+  }
+
+  @include breakpoint(large) {
+    margin: rem-calc($spacing--default 0 $spacing--small $spacing--small);
+  }
+}
+
+/// Generates centering rules for objects in WYSIWYGs.
+@mixin align-center {
+  display: table;
+  margin: rem-calc($spacing--xsmall) auto;
+}
+
+/// Generates rules for only showing items to a screen reader.
+@mixin show-for-sr {
+  position: absolute !important; // stylelint-disable-line
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px;
+}
+
+
+/// Generates rules for only showing items to a screen reader.
+@mixin show-for-sr {
+  position: absolute !important; // stylelint-disable-line
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px;
+}

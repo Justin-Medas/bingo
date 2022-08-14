@@ -1,0 +1,193 @@
+////
+/// @group global
+/// Styles relating primarily to type.
+////
+
+// Headings
+// --------
+$text-elements: h1, h2, h3, h4, h5, h6, p;
+
+@include typefaces($text-elements, true);
+
+// Margins
+// -------
+
+// Reset margins to 0.
+/*
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+iframe,
+table,
+.mobile-table {
+  margin: 0;
+}
+*/
+
+// Text Elements
+// -------------
+
+.eyebrow {
+  @include secondary-typeface(eyebrow);
+}
+
+a {
+  text-decoration: none;
+  color: $link-color;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+em {
+  font-style: italic;
+}
+
+b,
+strong {
+  font-weight: 700;
+}
+
+blockquote {
+  position: relative;
+  max-width: 745px;
+  margin: 0 auto;
+
+  p {
+    @include secondary-typeface(blockquote);
+  }
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: rem-calc(-80);
+    display: block;
+    content: '\201C';
+    color: $gray;
+    font-family: $serif;
+    font-size: 140px;
+    font-weight: 400;
+    line-height: .8;
+  }
+
+  .quotee {
+
+    @include typeface(p);
+    font-family: $sans-serif;
+  }
+}
+
+// --- Custom List Styles
+
+// Global
+
+ol,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+.wysiwyg {
+
+  li {
+    @include typeface(p);
+  }
+}
+
+// Ordered List
+ol {
+
+  @include global-spacing(medium, margin-top);
+  padding-left: 0;
+  list-style: none;
+  counter-reset: li;
+}
+
+ol > li {
+  position: relative;
+  padding-left: rem-calc($spacing--medium);
+  counter-increment: li;
+
+  li,
+  li:first-child {
+    @include global-spacing(2xsmall, margin-top);
+  }
+}
+
+ol > li::before {
+  position: absolute;
+  top: rem-calc(0);
+  left: rem-calc(0);
+  display: inline-block;
+  content: counter(li) '.';
+  color: $text-color;
+  font-size: rem-calc(18);
+  font-weight: 600;
+}
+
+// Unordered Lists
+.wysiwyg ul > li,
+.section--wysiwyg ul > li {
+  position: relative;
+  padding-left: rem-calc($spacing--medium);
+  list-style: none;
+
+  &::before {
+    position: absolute;
+    top: rem-calc(0);
+    left: rem-calc(0);
+    content: url('../../img/bullet.svg');
+  }
+}
+
+.stat {
+  @include secondary-typeface(stat);
+}
+
+.list--comma-separate,
+.list--inline {
+  ul {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: $sans-serif;
+  }
+  li {
+    display: inline-block;
+
+    &:not(:last-child) {
+      margin-right: .25em;
+    }    
+  }  
+}
+
+.list--comma-separate {
+
+  li {
+
+    &:nth-last-child(n+2)::after {
+      content: ',';
+    }
+  }
+}
+
+// Utility class to reset margins and use global spacing divs
+.text-margin-reset {
+
+  h1,
+  p,
+  h2,
+  h3,
+  h4,
+  span {
+    margin: 0;
+  }
+}

@@ -1,0 +1,8 @@
+////
+/// @group components-micro
+/// Styles for intro text.
+////
+
+.intro-text {
+  @include secondary-typeface(intro-text);
+}

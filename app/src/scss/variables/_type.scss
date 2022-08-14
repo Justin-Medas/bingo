@@ -1,0 +1,174 @@
+////
+/// @group type
+/// Site-wide typefaces.
+////
+
+/// Typefaces
+/// @type typeface
+$serif: 'Cormorant', serif;
+$sans-serif: 'Lato', sans-serif;
+$font-awesome: 'Font Awesome 5 Free'; // stylelint-disable-line
+$font-awesome-duotone: 'Font Awesome 5 Duotone'; // stylelint-disable-line
+$font-awesome-brands: 'Font Awesome 5 Brands'; // stylelint-disable-line
+
+/// Type Styles
+/// @type Map
+$type-styles: (
+  h1: (
+    initial: (
+      font-family: $serif,
+      font-size: rem-calc(40),
+      font-weight: 400,
+      line-height: 1,
+    ),
+    medium: (
+      font-size: rem-calc(56),
+    ),
+    large: (
+      font-size: rem-calc(78),
+    ),
+  ),
+  h2: (
+    initial: (
+      font-family: $sans-serif,
+      font-size: rem-calc(34),
+      font-weight: 600,
+      line-height: 1.2,
+      margin-bottom: 0,
+    ),
+    medium: (
+      font-size: rem-calc(40),
+    ),
+    large: (
+      font-size: rem-calc(60),
+    ),
+  ),
+  h3: (
+    initial: (
+      font-family: $sans-serif,
+      font-size: rem-calc(22),
+      font-weight: 600,
+      line-height: 1.2,
+    ),
+    medium: (
+      font-size: rem-calc(24),
+    ),
+    large: (
+      font-size: rem-calc(28),
+    ),
+  ),
+  h4: (
+    initial: (
+      font-family: $serif,
+      font-size: rem-calc(20),
+      font-weight: 600,
+      line-height: 1.2,
+    ),
+    medium: (
+      font-size: rem-calc(22),
+    ),
+  ),
+  h5: (
+    initial: (
+      font-family: $sans-serif,
+      font-size: rem-calc(18),
+      font-weight: 600,
+      line-height: 1.2,
+      text-transform: none,
+    ),
+    medium: (
+      font-size: rem-calc(20)
+    )
+  ),
+  h6: (
+    initial: (
+      font-family: $serif,
+      font-size: rem-calc(16),
+      font-weight: 500,
+      line-height: 1.2,
+      text-transform: none,
+    ),
+    medium: (
+      font-size: rem-calc(18)
+    )
+  ),
+  p: (
+    initial: (
+      font-family: $serif,
+      font-size: rem-calc(16),
+      font-weight: 400,
+      line-height: 1.625,
+    ),
+    large: (
+      font-size: rem-calc(18),
+    ),
+  ),
+);
+
+/// Custom text sizes.
+/// @type Map
+$secondary-type-styles: (
+  blockquote: (
+    initial: (
+      font-family: $sans-serif,
+      font-size: rem-calc(22),
+      font-weight: 400,
+      line-height: 1.55,
+    ),
+    large: (
+      font-size: rem-calc(30),
+    ),
+  ),
+  caption: (
+    initial: (
+      font-size: rem-calc(16),
+      font-style: italic,
+      line-height: 1.75,
+      font-weight: 400,
+      font-family: $sans-serif,
+    ),
+  ),
+  eyebrow: (
+    initial: (
+      font-size: rem-calc(14),
+      text-transform: uppercase,
+      line-height: 1.25,
+      font-weight: 600,
+    ),
+  ),
+  intro-text: (
+    initial: (
+      font-size: rem-calc(18),
+      font-weight: 400,
+      line-height: 1.4,
+      font-family: $sans-serif,
+    ),
+    medium: (
+      font-size: rem-calc(20),
+      line-height: 1.6,
+    ),
+    large: (
+      font-size: rem-calc(23),
+    ),
+  ),
+  small-text: (
+    initial: (
+      font-size: rem-calc(16),
+      font-weight: 400,
+      line-height: 1.65,
+    ),
+  ),
+  stat: (
+    initial: (
+      font-family: $sans-serif,
+      font-weight: 600,
+      font-size: rem-calc(60),
+      color: $accent-orange,
+      line-height: 1,
+    ),
+    medium: (
+      font-size: rem-calc(100),
+      line-height: .9,
+    ),
+  ),
+);

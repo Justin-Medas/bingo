@@ -1,0 +1,195 @@
+////
+/// @group global
+/// Base styles for form elements for any CMS.
+////
+
+// Global Form Element Resets
+// --------------------------
+// Get all major rendering engines to the same starting point.
+
+// Text inputs and buttons.
+// Uses Foundation's util/selector/text-inputs() method.
+#{text-inputs()},
+[type='file'],
+[type='image'],
+[type='submit'],
+button,
+textarea,
+select,
+fieldset {
+
+  @include button(
+    $init-defaults: true,
+    $size: small,
+    $type: null
+  );
+  // Remove all user-agent set appearance.
+  appearance: none;
+  // Webkit
+  margin: 0;
+  // Webkit and Blink
+  padding: rem-calc(8 14);
+  // Blink, Gecko, and Webkit
+  border-width: .0625em;
+  border-style: solid;
+  border-color: inherit;
+  border-radius: 0;
+  // Blink, Gecko, and Webkit
+  font-family: $sans-serif;
+  // Less than 16px or equivalent here causes Webkit on mobile to zoom in when
+  // selecting a field.
+  font-size: 1rem;
+}
+
+// Selects.
+select {
+
+  @include button(
+    $type: 'form-inputs',
+    $size: null,
+    $init-defaults: null,
+  );
+  // Remove all user-agent set appearance.
+  appearance: none;
+  // Webkit
+  margin: 0;
+
+  // This is a basic triangle. We need to convert the # in the color to it's
+  // HTML encoded form, '%23', for Blink and Gecko.
+  // stylelint-disable
+  // Disable linting so we can break the svg across lines for readability.
+  // background-image:
+  //   url(
+  //     'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="10"><polygon points="10,10 20,0 0,0" fill="#{str-insert(str-slice(quote($gray--dark), 2), '%23', 1)}"/></svg>'
+  //   );
+  // stylelint-enable
+  background-repeat: no-repeat;
+  background-position: calc(100% - .625em) 50%;
+  background-size: 1em;
+}
+
+// Fieldsets.
+fieldset {
+  display: block;
+
+  @include button(
+    $type: 'form-inputs',
+    $size: null,
+    $init-defaults: null,
+  );
+  // Webkit
+  margin: 0;
+  // Blink, Gecko, and Webkit
+  border-width: .0625em;
+  border-style: solid;
+  border-color: inherit;
+}
+
+// Buttons
+// -------
+button,
+[type='submit'] {
+  @include button(
+    $type: 'button',
+    $size: null,
+    $init-defaults: null,
+  );
+  // Webkit
+  margin: 0;
+  // Blink, Gecko, and Webkit all need cursor added back on [type='submit'].
+  cursor: pointer;
+  // If there is no button border, we need to remove the border added from the
+  // reset.
+  border: 0;
+}
+
+// Labels
+// ------
+label {
+  display: block;
+  color: $gray--dark;
+  font-family: $sans-serif;
+  font-weight: 400;
+  margin-bottom: $spacing--2xsmall;
+}
+
+// Text Inputs
+// -----------
+#{text-inputs()},
+[type='file'],
+[type='image'],
+textarea {
+  @include button(
+    $type: 'form-inputs',
+    $size: null,
+    $init-defaults: null,
+  );
+  // Webkit
+  margin: 0;
+  min-height: rem-calc(40);
+
+  @include placeholder {
+    color: $gray--dark;
+    font-family: $sans-serif;
+  }
+}
+
+// Checkboxes and Radios
+// ---------------------
+[type='checkbox'],
+[type='radio'] {
+  // Blink, Gecko, and Webkit
+  margin: 0;
+  cursor: pointer;
+
+  + label {
+    display: inline-block;
+    margin: 1em 0 1em .25em;
+    cursor: pointer;
+    vertical-align: middle;
+    color: $text-color;
+  }
+}
+
+// States
+// ------
+#{text-inputs()},
+[type='file'],
+[type='image'],
+select,
+textarea {
+
+  &:disabled {
+    background-color: $gray--light;
+  }
+}
+
+// Invalid styles, but not when the placeholder is present to avoid empty
+// fields from presenting an error before user interaction.
+#{text-inputs()},
+[type='file'],
+[type='image'],
+textarea {
+
+  &:not(:empty):invalid {
+    border-color: $accent-red;
+    box-shadow: 0 0 0 .0625em $accent-red;
+  }
+}
+
+#character-form {
+  @include global-spacing(xsmall, padding-top padding-bottom);
+  background-color: $white;
+  top: 0;
+  position: sticky;
+  .grid-x {
+    align-items: center;
+  }
+  label {
+    margin-bottom: 0;
+    padding-right: $spacing--2xsmall;
+  }
+  input {
+    width: 100%;
+  }
+}

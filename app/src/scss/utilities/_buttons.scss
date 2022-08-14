@@ -1,0 +1,149 @@
+////
+/// @group buttons
+/// Generates base rules for button styles.
+/// $size indicates padding and font size
+/// $type defines the background & text colors for all states
+///
+
+///
+/// @param {String} $size [null] - Size of the button often pertaining to the outer paddings, and button font size
+/// @example scss - By default the options are `large`, `small`, `tiny`
+///   .btn {
+///     @include button($size: large);
+///   }
+///
+/// @param {String} $type [null] - A type of button indicated by the style guide. These will change between projects, and more could be added. Most often it describes the button's `color`, `background-color`, `border-color`, and `hover`/`focus` state rules
+/// @example scss - By default there are `default`, `alternate`, `button`, and `form-inputs` options.
+///   .btn--alternate {
+///     @include button($type: alternate);
+///   }
+///
+/// @param {String} $init-defaults [false] - Add all the baseline styles share by all button types and sizes.
+/// @example scss - This can contain styles like `transition`, `font-family`, `text-transform`, etc.
+///   button {
+///     @include button($init-defaults: true);
+///   }
+///
+
+@mixin button(
+  $size: null,
+  $type: null,
+  $init-defaults: false
+) {
+  /// Shared Values between all $types & $sizes
+  @if $init-defaults == true {
+    transition: color .5s $bezier-ease, background .5s $bezier-ease, border .5s $bezier-ease;
+    font-weight: 500;
+    font-family: $sans-serif;
+    border-width: rem-calc(1);
+    border-style: solid;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    line-height: 1.1;
+    text-decoration: none;
+    margin-right: $spacing--3xsmall;
+    margin-bottom: $spacing--3xsmall;
+    text-transform: uppercase;
+    font-weight: 600;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      outline: none;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      pointer-events: none;
+      opacity: .6;
+    }
+  }
+  /// Sizes
+  @if $size == large {
+    font-size: rem-calc(18);
+    padding: $spacing--small rem-calc(25);
+  }
+  @if $size == small {
+    font-size: rem-calc(16);
+    padding: $spacing--xsmall $spacing--small .85rem;
+  }
+  @if $size == tiny {
+    font-size: rem-calc(16);
+    padding: $spacing--xsmall $spacing--small .85rem;
+  }
+  /// Types
+  @if $type == 'default' {
+    border-color: $primary-color;
+    color: $white;
+    background: $primary-color;
+
+    &::before,
+    &::after {
+      color: $white;
+    }
+
+    &:hover,
+    &:focus {
+      color: $white;
+      border-color: $primary-color--dark;
+      background: $primary-color--dark;
+
+      &::before,
+      &::after {
+        color: $white;
+      }
+    }
+  }
+
+  @if $type == 'alternate' {
+    border-color: $accent-orange;
+    color: $white;
+    background: $accent-orange;
+
+    &::before,
+    &::after {
+      color: $accent-orange;
+    }
+
+    &:hover,
+    &:focus {
+      color: $text-color;
+      border-color: $primary-color;
+      background: $white;
+
+      &::before,
+      &::after {
+        color: $accent-yellow;
+      }
+    }
+  }
+
+  @if $type == 'button' {
+    border-color: $accent-orange;
+    color: $white;
+    background: $accent-orange;
+
+    &:hover,
+    &:focus {
+      color: $white;
+      border-color: $primary-color--light;
+      background: $primary-color--light;
+    }
+  }
+
+  @if $type == 'form-inputs' {
+    border-color: $gray;
+    color: $text-color;
+    text-transform: none;
+    background: $white;
+
+    &:hover {
+      border-color: $primary-color--light;
+    }
+
+    &:focus {
+      border-color: $accent-green;
+    }
+  }
+}
